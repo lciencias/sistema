@@ -1,0 +1,277 @@
+.tdLeft{
+	text-align: left;	
+}
+
+.tdRight{
+	text-align: right;	
+}
+.sangriaBusqueda{
+	margin-left:2px;
+}
+.tdCenter{
+	text-align: center;
+}
+
+.tdJustify{
+	text-align: justify;
+}
+.titulos{
+	font-weight: bold;
+	background-color:#E5E5E5;
+}
+
+.sangria{
+	margin-left:  0px;
+	margin-right: 0px;
+}
+.inputSelect{
+	width:260px;
+}
+
+.inputText{
+	width:260px;
+}
+
+.inputPequena{
+	width:80px;
+}
+
+.negrita{
+	font-weight: bold;
+}
+
+.encabezado{
+	background-color:#fff;
+	text-align:right;
+}
+#procesando{
+	background:transparent;
+	position: absolute; 
+	left: 500px; 
+	top: 155px;
+	z-index:99999999;
+	
+}
+.searchs{
+	font-weight: none;
+}
+
+.combo{	
+	color:#999999;
+	font-weight: none;
+}
+#errorJs{
+	background:transparent;
+	position: absolute;
+	right:15px; 
+	top: 0px;
+	z-index:99999999;
+	width:auto;
+	text-align: center;
+}
+
+.upper{
+	text-transform: uppercase;
+}
+.correo{
+	text-transform: lowercase;
+}
+
+.linkBam:link{ color: #71BBDD;  text-decoration:none;}
+.linkBam:active{ color: #71BBDD;  text-decoration:none;}
+.linkBam:visited { color: #71BBDD;  text-decoration:none;}
+.linkBam:hover { color: #71BBDD;  text-decoration:none;font-weight: bold;} 
+
+.ligaBamBlanca:link{ color: #FFFFFF;  text-decoration:none;}
+.ligaBamBlanca:active{ color: #FFFFFF;  text-decoration:none;}
+.ligaBamBlanca:visited { color: #FFFFFF;  text-decoration:none;}
+.ligaBamBlanca:hover { color: #FFFFFF;  text-decoration:none;font-weight: bold;} 
+
+.ordena{
+	cursor:pointer;
+}
+
+.modal-header{
+	background-color:#eeeeee;
+	color:#000;
+	
+}
+
+.skin-blue-tituloProcesando{
+	font-family: Helvetica, Verdana;
+	font-size:22px;
+	text-align:center;
+	color:#3c8dbc;
+}
+
+.skin-red-tituloProcesando{
+	font-family: Helvetica, Verdana;
+	font-size:22px;
+	text-align:center;
+	color:#71BBDD;
+}
+
+.skin-green-tituloProcesando{
+	font-family: Helvetica, Verdana;
+	font-size:22px;
+	text-align:center;
+	color:#00a65a;
+}
+
+
+.skin-yellow-tituloProcesando{
+	font-family: Helvetica, Verdana;
+	font-size:22px;
+	text-align:center;
+	color:#f39c12;
+}
+.skin-purple-tituloProcesando{
+	font-family: Helvetica, Verdana;
+	font-size:22px;
+	text-align:center;
+	color:#605ca8;
+}
+.skin-black-tituloProcesando{
+	font-family: Helvetica, Verdana;
+	font-size:22px;
+	text-align:center;
+	color:#000000;
+}
+
+
+
+.skin-blue .tablesorter-bootstrap > tbody > tr.hover > td,
+.tablesorter-bootstrap > tbody > tr.odd:hover > td,
+.tablesorter-bootstrap > tbody > tr.even:hover > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.odd:hover ~ .tablesorter-childRow.odd > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.even:hover ~ .tablesorter-childRow.even > td {
+	background-color: #3c8dbc;  
+	color:#ffffff;
+}
+
+
+.skin-black .tablesorter-bootstrap > tbody > tr.hover > td,
+.tablesorter-bootstrap > tbody > tr.odd:hover > td,
+.tablesorter-bootstrap > tbody > tr.even:hover > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.odd:hover ~ .tablesorter-childRow.odd > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.even:hover ~ .tablesorter-childRow.even > td {
+	background-color: #000000; 
+	color:#ffffff;
+} 
+
+
+.skin-green .tablesorter-bootstrap > tbody > tr.hover > td,
+.tablesorter-bootstrap > tbody > tr.odd:hover > td,
+.tablesorter-bootstrap > tbody > tr.even:hover > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.odd:hover ~ .tablesorter-childRow.odd > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.even:hover ~ .tablesorter-childRow.even > td {
+	background-color: #00a65a; 
+	color:#ffffff;
+} 
+
+
+.skin-yellow .tablesorter-bootstrap > tbody > tr.hover > td,
+.tablesorter-bootstrap > tbody > tr.odd:hover > td,
+.tablesorter-bootstrap > tbody > tr.even:hover > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.odd:hover ~ .tablesorter-childRow.odd > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.even:hover ~ .tablesorter-childRow.even > td {
+	background-color: #f39c12;  
+	color:#ffffff;
+}
+
+
+
+.skin-purple .tablesorter-bootstrap > tbody > tr.hover > td,
+.tablesorter-bootstrap > tbody > tr.odd:hover > td,
+.tablesorter-bootstrap > tbody > tr.even:hover > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.odd:hover ~ .tablesorter-childRow.odd > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.even:hover ~ .tablesorter-childRow.even > td {
+	background-color: #605ca8; 
+	color:#ffffff;
+}
+
+
+.skin-red .tablesorter-bootstrap > tbody > tr.hover > td,
+.tablesorter-bootstrap > tbody > tr.odd:hover > td,
+.tablesorter-bootstrap > tbody > tr.even:hover > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.odd:hover ~ .tablesorter-childRow.odd > td,
+.tablesorter-bootstrap > tbody > tr.tablesorter-hasChildRow.even:hover ~ .tablesorter-childRow.even > td {
+	background-color: #71BBDD;  
+	color:#000000;
+}
+
+
+
+.box-header{
+	background-color: #f5f5f5;
+	border-top:2px solid #cccccc;
+	border-left: 2px solid #cccccc;
+	border-right: 2px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+}
+
+.box-body{
+	border:2px solid #cccccc;
+}
+
+tr:hover{
+background-color:gray;
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 24px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+

@@ -1,0 +1,30 @@
+<configuration xmlns="http://logging.apache.org/log4php/">
+	<appender name="consoleAppender" class="LoggerAppenderConsole" />
+    <appender name="fileAppender" class="LoggerAppenderDailyFile">
+       <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%d{ISO8601} %-6p [%L] %C M[%M] - %m%newline" />
+        </layout>
+        <param name="file" value="C:\xampp7\htdocs\sistema\storage\logs/Sistema-%s.log" />
+        <param name="datePattern" value="Y-m-d" />
+        <!--  SE DESCOMENTA PARA PRODUCCION-->
+        <!--  <param name="Threshold" value="INFO" />-->
+    </appender>
+      <appender name="fileAppenderError" class="LoggerAppenderDailyFile">
+       <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%d{ISO8601} %-6p [%L] %C M[%M] - %m%newline" />
+        </layout>
+        <param name="file" value="C:\xampp7\htdocs\sistema\storage\logs/errorSistema-%s.log" />
+        <param name="datePattern" value="Y-m-d" />
+        <param name="Threshold" value="ERROR" />
+    </appender>
+    <logger name="Foo">
+    	 <level value="INFO" />
+        <appender_ref ref="consoleAppender" />
+    </logger>
+    
+    <root>
+        <level value="DEBUG" />
+        <appender_ref ref="fileAppender" />
+         <appender_ref ref="fileAppenderError" />
+    </root>
+</configuration>
