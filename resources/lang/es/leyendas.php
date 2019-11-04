@@ -26,6 +26,7 @@ return array(
     'registros' => 'Registros',
     'creacion' => 'Nuevo ',
     'edicion' => 'Editar ',
+    'visualizar' => 'Visualizar',
     'listado' => 'Listado de ',
 	'configuracion.formatofechaYMD' => 'yyyy-mm-dd',
 	'configuracion.formatofechaDMY' => 'dd-mm-yyyy',
@@ -372,6 +373,17 @@ return array(
     'perfilPuesto.pruebas' => 'Pruebas',
     'perfilPuesto.competencias' => 'Competencias',
     'perfilPuesto.niveleImportancia' => 'Nivel importancia',
-    
+
+    /* Pruebas */
+    'no' => 'No.',
+    'seccion' => 'Sección',
+    'pruebaId' => 'Id Prueba',
+    'pruebaNombre' => 'Nombre de la Prueba',
+    'pruebaIrCuestionario' => 'Cuestionario',
+    'pruebaPregunta' => 'Pregunta',
+    'pruebaIndicacion' => 'Indicaciones',
+    'pruebavisualizarCuestionario' => 'Visualizar cuestioanrio',
+    'preguntaId' => 'Id',
+    'preguntaNombre' => 'Pregunta'
 );
 ?>

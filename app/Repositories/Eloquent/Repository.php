@@ -713,6 +713,18 @@ abstract class Repository implements RepositoryInterface {
         }
         return $regreso;
     }
+
+    function eliminaIndiceConKey($datos){
+        $regreso = array();
+        if(count($datos)  > 0){
+            foreach($datos as $ind => $tmp){
+                foreach($tmp as $key => $value){
+                    $regreso[$key] = $value;
+                }
+            }
+        }
+        return $regreso;
+    }
     
     function arryaKeys($datos,$key,$value){
         $regreso = array();

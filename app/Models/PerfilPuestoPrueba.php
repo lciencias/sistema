@@ -23,6 +23,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class PerfilPuestoPrueba extends Eloquent
 {
+    protected $table = 'perfil_puesto_pruebas';
 	protected $primaryKey = 'idperfil_puesto_pruebas';
 	public $timestamps = false;
 
