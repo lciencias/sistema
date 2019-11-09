@@ -5,6 +5,10 @@ namespace sistema\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use sistema\Repositories\EvaluacionRepository;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
+
 
 class EvaluacionController extends Controller
 {
@@ -27,8 +31,9 @@ class EvaluacionController extends Controller
         $controller    = $this->evaluacionRepository->obtenerNombreController($request);
         $moduloId      = $this->evaluacionRepository->obtenModuloId($controller);
         $perfilPuestos = $this->evaluacionRepository->obtenPerfilPuestos();
+        Session()->put('perfilPuestos',$perfilPuestos);
         $titulo        = "El candidato no tiene perfil de puesto asignado";
-        if((int) $perfilPuestos['idperfil_puesto'] > 0){
+        if((int) $perfilPuestos['idperfil_puesto'] > 0){            
             $pruebas = $this->evaluacionRepository->obtenPuestos($perfilPuestos);
             $titulo  = "El candidato tiene ".count($pruebas)." pruebas asignadas.";
         }
@@ -53,11 +58,26 @@ class EvaluacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            if($request->isMethod('post') && trim($request->get('valores') ) != ''){		
+                $this->evaluacionRepository->insertaCuestionario($request->get('valores'));
+                Session::flash ( 'message', Lang::get ( 'general.success' ) );
+            }else{
+                Session::flash ( 'message-error', Lang::get ( 'general.error' ) );
+            }
+        }
+        catch ( \Exception $e ) {
+            $this->log->error($e);
+            Session::flash ( 'message-error', Lang::get ( 'general.error' ) );
+        } finally {
+        return Redirect::to ( 'evaluacion/evaluacion' );
+        }
     }
 
     public function evalua($id){
         $titulo = "";
+        $horaActual = date("Y-m-d H:i:s");
+        Session()->put('horaActual',$horaActual);
         $preguntas = $opciones = array();
         if((int) $id > 0){
             $titulo = "Cuestionario";
@@ -65,20 +85,20 @@ class EvaluacionController extends Controller
                 if($this->evaluacionRepository->revisaPruebaUsuario($id)){
                     $preguntas = $this->evaluacionRepository->obtenPreguntas($id);
                     $ids = $this->obtenIdPreguntas($preguntas);
-                    $preguntas = $this->separaEnSecciones($preguntas);
+                    $preguntas = $this->separaEnSecciones($preguntas);                   
                     $opciones  = $this->evaluacionRepository->obtenOpciones($ids);
-                    $opciones  = $this->ordenaOpciones($opciones);                    
+                    $opciones  = $this->ordenaOpciones($opciones);        
+                    Session()->put('iniciaCuestionario',$horaActual);
                 }                
                 return view ( "evaluacion.cuestionario", [
                     "isAdmin" => $this->isAdmin, "titulo" => $titulo,
-                    "preguntas" => $preguntas, "opciones" => $opciones
+                    "preguntas" => $preguntas, "opciones" => $opciones,"horaActual" => substr($horaActual,11,8)
                         ] );
             }
             catch(\Exception $e){
                 $this->log->error($e);
             }
         }
-        //return view ( "layouts.error");
     }
     
     

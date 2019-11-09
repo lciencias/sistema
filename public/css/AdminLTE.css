@@ -4728,3 +4728,20 @@ table.text-center th {
     white-space: normal!important;
   }
 }
+
+a.linkTab:link{
+color:#3e4f88;
+} 
+a.linkTab:visited {
+  color:#3e4f88;
+}
+
+a.linkTab:hover{
+  color:#3e4f88;
+} 
+a.linkTab:active {
+  color:#800000;
+}
+.{
+
+}

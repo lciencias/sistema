@@ -1,6 +1,8 @@
 <?php
 return array(
     /* Leyendas para a pagina principal*/
+    'siguiente' => 'Siguiente',
+    'anterior'  => 'Anterior',
 	'regresalogin' => 'Regresar a Login',
     'titulo' => 'P-SeDiT',
 	'todas' => 'Todas',
@@ -384,6 +386,7 @@ return array(
     'pruebaIndicacion' => 'Indicaciones',
     'pruebavisualizarCuestionario' => 'Visualizar cuestioanrio',
     'preguntaId' => 'Id',
-    'preguntaNombre' => 'Pregunta'
+    'preguntaNombre' => 'Pregunta',
+    'iniciaCuestionario' => 'Hora de inicio' 
 );
 ?>

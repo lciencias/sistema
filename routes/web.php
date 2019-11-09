@@ -136,6 +136,7 @@ Route::post('gestion/desactivaPerfilPuesto', 'PerfilPuestoController@desactivar'
 //**********************************Modulo Evaluacion********************
 Route::get('evaluacion/evaluacion','EvaluacionController@index');
 Route::post('evaluacion/evaluacion','EvaluacionController@index');
+Route::post('evaluacion/store','EvaluacionController@store');
 Route::get('evaluacion/evalua/{id}', ['as' => 'evaluacion.evalua','uses' => 'EvaluacionController@evalua']);
 
 //**********************************Modulo Bitacoras********************
