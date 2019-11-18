@@ -33,9 +33,9 @@ return array(
 	'configuracion.formatofechaYMD' => 'yyyy-mm-dd',
 	'configuracion.formatofechaDMY' => 'dd-mm-yyyy',
 	'configuracion.fecha' => 'Fecha',
-	'home.tareas.pendientes' =>  'Tareas pendientes',
-	'home.tareas' => 'Ver todas las tareas',
-    'misTareas' => 'Mis tareas pendientes',
+	'home.tareas.pendientes' =>  'Interpretaciones',
+	'home.tareas' => 'Ver todas las interpretaciones',
+    'misTareas' => 'Mis interpretaciones',
 	'error' => '',
 	'errorDescripcion' => 'El registro seleccionado no se encuentra registrado',
     /* Pagina para inicio de cada modulo del administrador */
@@ -387,6 +387,13 @@ return array(
     'pruebavisualizarCuestionario' => 'Visualizar cuestioanrio',
     'preguntaId' => 'Id',
     'preguntaNombre' => 'Pregunta',
-    'iniciaCuestionario' => 'Hora de inicio' 
+    'iniciaCuestionario' => 'Hora de inicio',
+    
+    /*Interpretacion*/
+    'interpretacion.perfil' => 'Perfil del puesto:',
+    'interpretacion.prueba' => 'Nombre de la prueba:',
+    'interpretacion.resultado' => 'Resultado:',
+    'interpretacion.mensaje' => 'Interpretación:'
+    
 );
 ?>

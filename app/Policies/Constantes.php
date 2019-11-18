@@ -59,6 +59,7 @@ class Constantes {
 	const CONTROLLER_CANDIDATO = "CandidatoController";
 	const CONTROLLER_PRUEBA = "PruebaController";
 	const CONTROLLER_PERFIL_PUESTO = "PerfilPuestoController";
+	const CONTROLLER_INTERPRETACION = "InterpretacionController";
 	
 		
 	
@@ -96,6 +97,7 @@ class Constantes {
     const MODULO_ID_CANDIDATO = 8;
     const MODULO_ID_PRUEBA = 18;
     const MODULO_ID_PERFIL_PUESTO = 17;
+     
     
     //Etapas alta de prueba
     const ETAPA_PRUEBA_INICIAL                    = 0;

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrapValidator.css')}}">
+    
     <link rel="stylesheet" href="{{asset('css/seguros.css')}}">
     <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -127,6 +128,7 @@
     </div>
     @include('layouts.modal')
     @include('layouts.modalConsulta')
+    @include('layouts.modalInterpretacion')
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>{{Lang::get('leyendas.version')}}</b>

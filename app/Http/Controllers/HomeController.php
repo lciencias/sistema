@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use sistema\Policies\Constantes;
-use sistema\Repositories\UsuarioRepository;
+use sistema\Repositories\InterpretacionRepository;
 
 class HomeController extends Controller
 {
 
-    public function __construct(UsuarioRepository $repository){
+    public function __construct(InterpretacionRepository $interpretacionRepository){
     	parent::__construct();
-        $this->miTareaRepository = $repository;
+    	$this->interpretacionRepository = $interpretacionRepository;
     }
     /**
      * Display a listing of the resource.
@@ -23,6 +23,9 @@ class HomeController extends Controller
     public function index()
     {
     	try{
+    	    $interpretaciones = $this->interpretacionRepository->recuperaInterpretacionCandidato();
+    	    Session::put('interpretaciones', $interpretaciones);
+    	    Session::put('totalInterpretaciones', count($interpretaciones));
 			return view('layouts.home');
     	}catch(\Exception $e){
     		$this->log->error(($e->getMessage()));

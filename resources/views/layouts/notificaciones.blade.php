@@ -1,29 +1,31 @@
-@if (Session::get('noTareas') > 0)
+@if (Session::get('totalInterpretaciones') > 0)
 <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle"
 	data-toggle="dropdown" data-toggle="tooltip" data-placement="left"
 	title="Tareas Pendientes"> <i class="glyphicon glyphicon-list-alt"></i>
-		<span class="label label-success" id="" style="font-weight:bold;" id="noTareasHeader"">{{Session::get('noTareas')}}</span>
+		<span class="label label-success" id="" style="font-weight:bold;" id="noTareasHeader">{{Session::get('totalInterpretaciones')}}</span>
 </a>
 	<ul class="dropdown-menu">
-		<li class="header">{{Lang::get('leyendas.home.tareas.pendientes')}}:&nbsp;&nbsp;<b>{{Session::get('noTareas')}}</b></li>
+		<li class="header">{{Lang::get('leyendas.home.tareas.pendientes')}}:&nbsp;&nbsp;<b>{{Session::get('totalInterpretaciones')}}</b></li>
 		<li>
 			<ul class="menu">
-				@foreach (Session::get('tareas') as $tarea)
-				<li><a href="{{$menu->getPathWeb()}}{{$tarea->path}}" id="{{$tarea->idmi_tarea}}" class="seleccionaIdtarea">
-						<div class="pull-left tdCenter">
-							<span class="glyphicon glyphicon-list-alt"></span> &nbsp;
-						</div>
-						<p style="font-size: 13px; font-weight: bold;">{{$tarea->actividad}}
-						
-						
+				@foreach (Session::get('interpretaciones') as $inter)
+				<li>
+					<input type="hidden" name="inter{{$inter->idprueba_interpretacion}}" id="inter{{$inter->idprueba_interpretacion}}" 
+					value="{{$inter->candidato}}|{{$inter->paterno}}|{{$inter->materno}}|{{$inter->prueba}}|{{$inter->perfil}}|{{$inter->resultado}}|{{$inter->interpretacion}}">
+					<a href="#" id="{{$inter->idprueba_interpretacion}}" class="seleccionaIdInterpretacion" >
+				
+					<div class="pull-left tdCenter">
+						<span class="glyphicon glyphicon-list-alt"></span> &nbsp;
+					</div>
+					<p style="font-size: 13px; font-weight: bold;">{{$inter->prueba}}
 						<p style="font-size: 12px;">
-							<small><i class="fa fa-clock-o"></i>
-								{{substr($tarea->fecha_limite,8,2)}}-{{substr($tarea->fecha_limite,5,2)}}-{{substr($tarea->fecha_limite,0,4)}}
-								{{substr($tarea->fecha_limite,11,8)}} <br>{{$tarea->nombre}}</small>
+							<small><i class="glyphicon glyphicon-pencil">{{$inter->resultado}}</i></small>
 						</p>
-				</a></li> @endforeach
+					</p>
+				</a></li> 
+				@endforeach
 			</ul>
 		</li>
-		<li class="footer"><a href="{{$menu->getPathWeb()}}misTareas">{{Lang::get('leyendas.home.tareas')}}</a></li>
+		<!--  <li class="footer"><a href="{{$menu->getPathWeb()}}misTareas">{{Lang::get('leyendas.home.tareas')}}</a></li>-->
 	</ul></li>
 @endif

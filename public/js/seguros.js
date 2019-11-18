@@ -170,7 +170,23 @@ $(document).ready(function() {
             }).show();
         });
 
- 
+
+    $(".seleccionaIdInterpretacion").click(function(){
+    	var id     = $(this).attr('id');
+    	var cadena ="";
+    	var datos;
+    	if(parseInt(id) > 0){
+    		cadena = $("#inter"+id).val(); 
+    		datos = cadena.split('|');
+    		$("#nombreCandidato").html(datos[0]+' '+datos[1]+' '+datos[2]);
+    		$("#pruebaCandidato").html(datos[3]);
+    		$("#perfilCandidato").html(datos[4]);
+    		$("#resultadoCandidato").html(datos[5]);
+    		$("#interpretacionCandidato").html(datos[6]);
+    		$("#modalInterpretacion").modal('show');
+    		return false;
+    	}
+    })
 });  //Fin de jquery
 
 
