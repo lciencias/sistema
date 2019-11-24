@@ -393,7 +393,19 @@ return array(
     'interpretacion.perfil' => 'Perfil del puesto:',
     'interpretacion.prueba' => 'Nombre de la prueba:',
     'interpretacion.resultado' => 'Resultado:',
-    'interpretacion.mensaje' => 'Interpretación:'
+    'interpretacion.mensaje' => 'Interpretación:',
+    
+    /*Calificar */
+    'calificar' => 'Calificar',
+    'calificar.nombre'   => 'Nombre candidato',
+    'calificar.paterno'  => 'Paterno candidato',
+    'calificar.materno'  => 'Materno candidato',
+    'calificar.proyecto' => 'Proyecto',
+    'calificar.ejercicio' => 'Ejercicio',
+    'calificar.fechaFin' => 'Fecha Fin',
+    'calificar.estatus' => 'Estatus',
+    'calificar.accion' => 'Acciones',
+    
     
 );
 ?>

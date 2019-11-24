@@ -138,7 +138,9 @@ Route::get('evaluacion/evaluacion','EvaluacionController@index');
 Route::post('evaluacion/evaluacion','EvaluacionController@index');
 Route::post('evaluacion/store','EvaluacionController@store');
 Route::get('evaluacion/evalua/{id}', ['as' => 'evaluacion.evalua','uses' => 'EvaluacionController@evalua']);
-
+Route::post('evaluacion/calificar','CalificarController@index');
+Route::get('evaluacion/calificar','CalificarController@index');
+Route::get('evaluacion.calificar.edit/{id}', ['as' => 'evaluacion.calificar.edit','uses' => 'CalificarController@edit']);
 //**********************************Modulo Bitacoras********************
 
 //Accesos

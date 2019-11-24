@@ -49,6 +49,6 @@ class PreguntaPrueba extends Eloquent
 
 	public function opcion_pregunta()
 	{
-		return $this->hasMany(\sistema\Models\OpcionPreguntum::class, 'idpregunta_prueba');
+		return $this->hasMany(\sistema\Models\OpcionPregunta::class, 'idpregunta_prueba');
 	}
 }

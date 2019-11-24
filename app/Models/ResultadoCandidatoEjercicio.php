@@ -43,7 +43,7 @@ class ResultadoCandidatoEjercicio extends Eloquent
 
 	public function competencium()
 	{
-		return $this->belongsTo(\sistema\Models\Competencium::class, 'idcompetencia');
+		return $this->belongsTo(\sistema\Models\Competencia::class, 'idcompetencia');
 	}
 
 	public function candidato_proyecto_ejercicio()

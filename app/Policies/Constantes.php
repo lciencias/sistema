@@ -17,8 +17,8 @@ class Constantes {
     const MAIL_REMITENTE    = "Notificaciones Sistema";
     const THIS_IP             = "localhost"; // cambiar est ip por la ip del server
     const EMAIL_SOPORTE 	= 'molina_mikea@hotmail.com';
-    const PATH_ABSOLUTO       = "c:/xampp7/htdocs"; // cambiar esto por el path donde esté alojado el proyecto
-    const PATH_ABSOLUTO2       = "/xampp7/htdocs"; // cambiar esto por el path donde esté alojado el proyecto
+    const PATH_ABSOLUTO       = "c:/xampp/htdocs"; // cambiar esto por el path donde esté alojado el proyecto
+    const PATH_ABSOLUTO2       = "/xampp/htdocs"; // cambiar esto por el path donde esté alojado el proyecto
     
     //produccion
 //     const MAIL_FROM         = "comunicacion@sigese.com";
@@ -129,7 +129,7 @@ class Constantes {
     const CATALOGO_TIPOS_INTERPRETACION = array('C' => 'Combinación', 'D' => 'Dominio', 'P' => 'Porcentaje');
     const CATALOGO_NIVELES_PUESTO = array('AD' => 'Alta Dirección', 'DI' => 'Dirección', 'AD' => 'Alta gerencia', 'GE' => 'Gerencia', 'GJ' => 'Gerencia Junior', 'JE' => 'Alta gerencia', 'AD' => 'Jefatura', 'SU' => 'Supervisión');
     const CATALOGO_NIVELES_IMPORTANCIA= array('IM' => 'Imprescindible ', 'MI' => 'Muy Importante', 'IT' => 'Importante', 'LI' => 'Ligeramente importante', 'BI' => 'No Importante');
-    
+    const CATALOGO_ESTATUS_CALIFICAR = array(0 => 'Sin Calificar', 1 => 'Incompleto', 2 => 'Calificado', 3 => 'Finalizado');       
     //????
     const EMAIL_ALTA_USUARIO = 1;
     const EMAIL_ALTA_EMPRESA = 2;

@@ -30,14 +30,16 @@ class EvaluacionController extends Controller
         Session::forget('message-warning');
         $controller    = $this->evaluacionRepository->obtenerNombreController($request);
         $moduloId      = $this->evaluacionRepository->obtenModuloId($controller);
+        $titulo        = "El candidato no tiene perfil de puesto asignado";
         $perfilPuestos = $this->evaluacionRepository->obtenPerfilPuestos();
         Session()->put('perfilPuestos',$perfilPuestos);
-        $titulo        = "El candidato no tiene perfil de puesto asignado";
-        if((int) $perfilPuestos['idperfil_puesto'] > 0){            
+        
+        if($perfilPuestos != null && (int) $perfilPuestos['idperfil_puesto'] > 0){            
             $pruebas = $this->evaluacionRepository->obtenPuestos($perfilPuestos);
             $titulo  = "El candidato tiene ".count($pruebas)." pruebas asignadas.";
         }
-        return view ( 'evaluacion.index', ["moduloId"  => $moduloId,"isAdmin"   => $this->isAdmin,"idRol" => $this->idRol, 'titulo' => $titulo, 'pruebas' => $pruebas]);
+        return view ( 'evaluacion.index', ["moduloId"  => $moduloId,"isAdmin"   => $this->isAdmin,"idRol" => $this->idRol, 
+                    'titulo' => $titulo, 'pruebas' => $pruebas]);
     }
 
     /**

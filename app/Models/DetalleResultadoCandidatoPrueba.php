@@ -44,6 +44,6 @@ class DetalleResultadoCandidatoPrueba extends Eloquent
 
 	public function opcion_preguntum()
 	{
-		return $this->belongsTo(\sistema\Models\OpcionPreguntum::class, 'idopcion_pregunta');
+		return $this->belongsTo(\sistema\Models\OpcionPregunta::class, 'idopcion_pregunta');
 	}
 }

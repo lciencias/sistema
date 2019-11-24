@@ -2,8 +2,6 @@
 
 namespace sistema\Http\Controllers;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
@@ -14,7 +12,6 @@ use sistema\User;
 use sistema\Policies\Constantes;
 use sistema\Jobs\EnviaEmailAltaUsuarioJob;
 use sistema\Jobs\EnviaEmailReseteoPasswordJob;
-use Illuminate\Http\Response;
 use sistema\Models\Perfil;
 use Illuminate\Support\Facades\Crypt;
 
