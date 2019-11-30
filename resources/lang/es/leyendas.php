@@ -405,6 +405,13 @@ return array(
     'calificar.fechaFin' => 'Fecha Fin',
     'calificar.estatus' => 'Estatus',
     'calificar.accion' => 'Acciones',
+    'calificar.titulo' => 'Evaluacion calificar',
+    'calificar.gerente' => 'Gerente de Proyectos',
+    'calificar.ejercicio' => 'Ejercicio: ',
+    'calificar.observaciones' => 'Teclea tus observaciones',
+    'calificar.competencia' => 'Competencias',
+    'calificar.comportamiento' => 'Comportamientos',
+    'calificar.texto' => 'Calificación de texto'
     
     
 );

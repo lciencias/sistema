@@ -82,11 +82,11 @@
                                     <small>{{$menu->getIdentificadorUsuario()}}<br>{{$menu->getIngreso()}}</small></p>
                             </li>
                             <li class="user-footer">
-                                <div class="pull-left" style="border-color: blue;">
-                                    <a href="{{url('/auth/reset/reset')}}" class="btn btn-default btn-sm" style="border-color: red;">{{Lang::get('leyendas.actualizarPassword')}}</a>
+                                <div class="pull-left">
+                                    <a href="{{url('/auth/reset/reset')}}" class="btn btn-default btn-sm">{{Lang::get('leyendas.actualizarPassword')}}</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{url('/logout')}}" class="btn btn-default btn-flat btn-sm" style="border-color: red;">{{Lang::get('leyendas.cerrarSesion')}}</a>
+                                    <a href="{{url('/logout')}}" class="btn btn-default btn-flat btn-sm">{{Lang::get('leyendas.cerrarSesion')}}</a>
                                 </div>
                             </li>
                         </ul>

@@ -3,14 +3,10 @@
 namespace sistema\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 use sistema\Policies\Constantes;
 use sistema\Repositories\CalificarRepository;
-use Illuminate\Support\Facades\Crypt;
-use sistema\Models\ViewEjercicio;
 
 
 class CalificarController extends Controller
@@ -184,7 +180,12 @@ class CalificarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){}
+    public function update(Request $request, $id){
+        die("id:  ".$id);
+        
+        
+        
+    }
     
     /**
      * Remove the specified resource from storage.

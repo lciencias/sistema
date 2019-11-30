@@ -275,3 +275,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+
+
+
+.menus{ height:80px; width:100%; background:#333; color:white; text-align:center}
+.fixsed{position:fixed; top:100}
