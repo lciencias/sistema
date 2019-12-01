@@ -8,6 +8,7 @@
 	<input type="hidden" id="estatus"  name="estatus"  value="{{$idEstatus}}">
 	<?php 
     	$read = "";    	
+    	$temIdRes = $temIdDet = $temCal = $temSel = $temIdRes = $temIdDet = 0;
     	if($idEstatus == 3){
     		$read = " disabled ";
     	}
