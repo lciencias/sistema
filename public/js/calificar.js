@@ -26,10 +26,10 @@ $(document).ready(function() {
 			}
 		});
 		if( parseInt(noComportamientos) === parseInt(contadorRadios) && parseInt(noComportamientos) === parseInt(contadorSelect)  && parseInt(observaciones.length) >0 ){
-			return true;
+			$("#estatus").val(2);
 		}else{
-			error("Favor de verificar sus respuestas.");
+			$("#estatus").val(1);
 		}
-		return false;
+		return true;
 	});
 });

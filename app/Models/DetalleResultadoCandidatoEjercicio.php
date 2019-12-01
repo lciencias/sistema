@@ -33,14 +33,14 @@ class DetalleResultadoCandidatoEjercicio extends Eloquent
 	protected $casts = [
 		'idresultado_candidato_ejercicio' => 'int',
 		'idcomportamiento' => 'int',
-		'iduser' => 'int',
+		'idcalificacion_comportamiento' => 'int',
 		'calificacion' => 'float'
 	];
 
 	protected $fillable = [
 		'idresultado_candidato_ejercicio',
 		'idcomportamiento',
-		'iduser',
+	    'idcalificacion_comportamiento',
 		'calificacion'
 	];
 

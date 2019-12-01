@@ -134,15 +134,19 @@ Route::post('gestion/desactivaPerfilPuesto', 'PerfilPuestoController@desactivar'
 
 
 //**********************************Modulo Evaluacion********************
-Route::get('evaluacion/evaluacion','EvaluacionController@index');
+Route::resource('evaluacion/evaluacion','EvaluacionController');
+Route::get ('evaluacion/evaluacion','EvaluacionController@index');
 Route::post('evaluacion/evaluacion','EvaluacionController@index');
 Route::post('evaluacion/store','EvaluacionController@store');
-Route::get('evaluacion/evalua/{id}', ['as' => 'evaluacion.evalua','uses' => 'EvaluacionController@evalua']);
-Route::post('evaluacion/calificar','CalificarController@index');
-Route::get('evaluacion/calificar','CalificarController@index');
-Route::get('evaluacion.calificar.edit/{id}', ['as' => 'evaluacion.calificar.edit','uses' => 'CalificarController@edit']);
+Route::get ('evaluacion/evalua/{id}', ['as' => 'evaluacion.evalua','uses' => 'EvaluacionController@evalua']);
 
-Route::post('evaluacion.calificar.update/{$id}', ['as' => 'evaluacion.calificar.update','uses' => 'CalificarController@update']);
+
+Route::resource('evaluacion/calificar','CalificarController');
+Route::get ('evaluacion/calificar','CalificarController@index');
+Route::post('evaluacion/calificar','CalificarController@index');
+Route::get ('evaluacion.calificar.edit/{id}', ['as' => 'evaluacion.calificar.edit','uses' => 'CalificarController@edit']);
+Route::post ('evaluacion.calificar.update/{id}', ['as' => 'evaluacion.calificar.update','uses' => 'CalificarController@update']);
+
 
 //**********************************Modulo Bitacoras********************
 //Accesos

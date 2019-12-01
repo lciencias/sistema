@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use sistema\Policies\Constantes;
 use sistema\Repositories\CalificarRepository;
-
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
 
 class CalificarController extends Controller
 {
@@ -34,7 +35,7 @@ class CalificarController extends Controller
             ] );
         }
     }
-  
+    
     /**
      * Metodo para buscar usuarios
      * @param Request $request
@@ -56,24 +57,24 @@ class CalificarController extends Controller
         $total      = $this->calificarRepository->findByCount($filtros);
         $ejercicios = $this->calificarRepository->findByColumn($filtros,$opciones);
         return ["ejercicios" => $ejercicios,
-                "total"      => $total,
-                "leyenda"    => $this->calificarRepository->generaLetrero($total,count($ejercicios),$opciones),
-                "sessionPermisos" => $session[$moduloId],
-                "filtros"     => $filtros,
-                "moduloId"    => $moduloId,
-                "tipo"        => $tipo,
-                "proyectos"   => $proyectos,
-                "noPage" 	  => $opciones['nopage'],
-                "noRegs" 	  => $opciones['noregs'],
-                "nombre"  	  => $request->get('nombre'),
-                "paterno" 	  => $request->get('paterno'),
-                "materno" 	  => $request->get('materno'),
-                "fechaFin"    => $request->get('fechaFin'),
-                "idProyecto"  => $request->get('idProyecto'),
-                "idEjercicio" => $request->get('idEjercicio'),
-                "estatus"     => $request->get('estatus'),
-                "catEstatus"  => Constantes::CATALOGO_ESTATUS_CALIFICAR,
-                "isAdmin"     => Session::get ('isAdmin'),
+            "total"      => $total,
+            "leyenda"    => $this->calificarRepository->generaLetrero($total,count($ejercicios),$opciones),
+            "sessionPermisos" => $session[$moduloId],
+            "filtros"     => $filtros,
+            "moduloId"    => $moduloId,
+            "tipo"        => $tipo,
+            "proyectos"   => $proyectos,
+            "noPage" 	  => $opciones['nopage'],
+            "noRegs" 	  => $opciones['noregs'],
+            "nombre"  	  => $request->get('nombre'),
+            "paterno" 	  => $request->get('paterno'),
+            "materno" 	  => $request->get('materno'),
+            "fechaFin"    => $request->get('fechaFin'),
+            "idProyecto"  => $request->get('idProyecto'),
+            "idEjercicio" => $request->get('idEjercicio'),
+            "estatus"     => $request->get('estatus'),
+            "catEstatus"  => Constantes::CATALOGO_ESTATUS_CALIFICAR,
+            "isAdmin"     => Session::get ('isAdmin'),
         ];
     }
     
@@ -104,7 +105,7 @@ class CalificarController extends Controller
             $filtros[] = ['view_ejercicio.idtipo_ejercicio', '=',$idEjercicio];
         }
         if(trim($fechaFin) != "") {
-        $filtros[] = ['view_ejercicio.fecha_fin', '=', $fechaFin];
+            $filtros[] = ['view_ejercicio.fecha_fin', '=', $fechaFin];
         }
         if($estatus > 0){
             $filtros[] = ['view_ejercicio.estatus', '=',$estatus];
@@ -141,11 +142,13 @@ class CalificarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
+        Session()->put('editar',true);
         $cliente = null;
         $id =  Crypt::decrypt($id);
         if (( int ) $id > 0) {
             try {
                 Session ()->put ( 'editar', true );
+                $calificaciones = array();
                 $candidatoProyectoEjercicio = $this->calificarRepository->obtenRegistro( $id );
                 $cliente      = $this->calificarRepository->obtenCliente($candidatoProyectoEjercicio['idcliente']);
                 $competencias = $this->calificarRepository->obtenCompetencias();
@@ -155,8 +158,10 @@ class CalificarController extends Controller
                 $totalCalific = $this->calificarRepository->obtenTotal();
                 $registros    = $this->calificarRepository->uneArrays($registros,$calificacion,'calif');
                 $registros    = $this->calificarRepository->uneArrays($registros,$caliNumerica,'combo');
-                //$this->calificarRepository->debug($registros);
                 $idEjercicio  = $candidatoProyectoEjercicio['idcandidato_proyecto_ejercicio'];
+                if((int) $candidatoProyectoEjercicio['estatus']> 0){ // consulto datos
+                    $calificaciones = $this->calificarRepository->recuperaCalificaciones($idEjercicio);
+                }
                 return view ( "evaluacion.calificar.editCalificar", [
                     "candidatoProyectoEjercicio" => $candidatoProyectoEjercicio,
                     "idProyectoEjercicio" => $idEjercicio,
@@ -164,11 +169,13 @@ class CalificarController extends Controller
                     "competencias" => $competencias,
                     "calificacion" => $calificacion,
                     "registros" => $registros,
-                    "cliente" => $cliente                    
+                    "calificaciones" => $calificaciones,
+                    "idEstatus" => $candidatoProyectoEjercicio['estatus'],
+                    "cliente" => $cliente
                 ] );
             }
             catch ( \Exception $e ) {
-                die("msg:  ".$e->getMessage());                
+                die("msg:  ".$e->getMessage());
             }
         }
     }
@@ -181,10 +188,18 @@ class CalificarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        die("id:  ".$id);
-        
-        
-        
+        try{
+            $id =  Crypt::decrypt($id);
+            $this->calificarRepository->guardaRegistros($request, $id);
+            Session::flash ( 'message', Lang::get ( 'general.success' ) );            
+        }
+        catch ( \Exception $e ) {
+            $this->log->error($e);
+            Session::flash ( 'message-error', Lang::get ( 'general.error' ) );
+        }
+        finally {
+            return Redirect::to ( 'evaluacion/calificar' );
+        }
     }
     
     /**
