@@ -10,6 +10,7 @@ use sistema\Models\CandidatoProyectoEjercicio;
 use sistema\Models\TipoEjercicioClienteComportamiento;
 use sistema\Models\ResultadoCandidatoEjercicio;
 use sistema\Models\DetalleResultadoCandidatoEjercicio;
+use sistema\Models\CalificacionComportamiento;
 
 
 /**
@@ -62,7 +63,7 @@ class CalificarRepository extends Repository {
                 'tipo_ejercicio_cliente_comportamiento.idtipo_ejercicio_cliente',
                 'comportamiento.idcompetencia','comportamiento.nombre as comportamiento',
                 'competencia.idtipo_competencia','competencia.nombre as competencia',
-                'tipo_competencia.nombre as tipo_competencia')
+                'tipo_competencia.nombre as tipo_competencia')            
             ->where('tipo_ejercicio_cliente_comportamiento.idtipo_ejercicio_cliente', '=', $idtipo_ejercicio_cliente)
             ->orderBy('competencia.idcompetencia','asc')
             ->get()->toArray());    
@@ -81,16 +82,23 @@ class CalificarRepository extends Repository {
             ->get()->toArray());
     }
     
-    public function obtenCalificacionNumerica($idtipo_ejercicio_cliente){
-        return $this->agrupaCalificacionBiz(TipoEjercicioClienteComportamiento
-         ::join('comportamiento','comportamiento.idcomportamiento','=','tipo_ejercicio_cliente_comportamiento.idcomportamiento')
-         ->join('calificacion_comportamiento','calificacion_comportamiento.idcomportamiento', '=', 'comportamiento.idcomportamiento')
-         ->join('calificacion_escala','calificacion_escala.idescala_calificacion_competencia', '=', 'calificacion_comportamiento.idescala_calificacion_competencia')
-            ->select('tipo_ejercicio_cliente_comportamiento.idcomportamiento','calificacion_escala.idcalificacion_escala','calificacion_escala.calificacion')
-         ->where('tipo_ejercicio_cliente_comportamiento.idtipo_ejercicio_cliente', '=', $idtipo_ejercicio_cliente)
-         ->orderBy('comportamiento.idcomportamiento','asc')
-         ->orderBy('calificacion_escala.calificacion','asc')
-         ->get()->toArray());
+    public function obtenCalificacionNumerica($id,$estatus){
+        return $this->agrupaCalificacionBiz(ResultadoCandidatoEjercicio
+            ::join('detalle_resultado_candidato_ejercicio','detalle_resultado_candidato_ejercicio.idresultado_candidato_ejercicio', '=' ,'resultado_candidato_ejercicio.idresultado_candidato_ejercicio')
+            ->leftjoin('calificacion_comportamiento','calificacion_comportamiento.idcalificacion_comportamiento','=','detalle_resultado_candidato_ejercicio.idcalificacion_comportamiento')
+            ->join('calificacion_escala','calificacion_escala.idescala_calificacion_competencia','=','calificacion_comportamiento.idescala_calificacion_competencia')            
+            ->where('resultado_candidato_ejercicio.idcandidato_proyecto_ejercicio','=', $id)
+            ->select('resultado_candidato_ejercicio.idresultado_candidato_ejercicio',
+                'resultado_candidato_ejercicio.idcompetencia',
+                'detalle_resultado_candidato_ejercicio.iddetalle_resultado_candidato_ejercicio',
+                'detalle_resultado_candidato_ejercicio.idcomportamiento',
+                'detalle_resultado_candidato_ejercicio.calificacion',
+                'detalle_resultado_candidato_ejercicio.idcalificacion_comportamiento',
+                'calificacion_comportamiento.calificacion_texto','calificacion_escala.calificacion')
+            ->orderBy('resultado_candidato_ejercicio.idcompetencia','asc')
+            ->orderBy('detalle_resultado_candidato_ejercicio.idcomportamiento','asc')
+            ->orderBy('calificacion_escala.calificacion','asc')
+            ->get()->toArray(), $estatus);
     }
     
     
@@ -133,7 +141,7 @@ class CalificarRepository extends Repository {
         $this->actualizaCandadidatoProyectoEjercicio($request);
     }
     
-    public function recuperaCalificaciones($idEjercicio){
+    public function recuperaCalificaciones($idEjercicio){       
         return $this->generaFormato(ResultadoCandidatoEjercicio
         ::join('detalle_resultado_candidato_ejercicio','detalle_resultado_candidato_ejercicio.idresultado_candidato_ejercicio', '=' ,'resultado_candidato_ejercicio.idresultado_candidato_ejercicio')
         ->where('resultado_candidato_ejercicio.idcandidato_proyecto_ejercicio','=', $idEjercicio)
@@ -147,6 +155,25 @@ class CalificarRepository extends Repository {
         ->orderBy('detalle_resultado_candidato_ejercicio.idcomportamiento','asc')
         ->get()->toArray());
     }
+    
+    public function getCalificacionesNumericas($id){
+        return $this->generaCalificaciones(CalificacionComportamiento::join('calificacion_escala','calificacion_escala.idescala_calificacion_competencia','=','calificacion_comportamiento.idescala_calificacion_competencia')
+        ->where('calificacion_comportamiento.idcalificacion_comportamiento','=', $id)
+        ->select('calificacion_escala.calificacion')
+        ->orderBy('calificacion_escala.calificacion','asc')
+        ->get()->toArray());
+    }
+    
+    private function generaCalificaciones($array){
+        $regreso = array();
+        foreach($array as $ind => $data){
+            foreach($data as $value){
+                $regreso[$ind] = $value;
+            }
+        }
+        return $regreso;
+    }
+    
     
     private function generaFormato($datas){
         $regreso = array();
@@ -168,21 +195,21 @@ class CalificarRepository extends Repository {
         $competencias = $comportamientos = array();
         if($estatus > 0){  // ya existen comentarios, los eliminos
             $this->eliminaCalificaciones($input);
-        }        
-        foreach($input as $key => $value){
-            if( substr($key,0,2) == "s-"){
-            $tmp = explode('-',$key);
-            $idCompetencia = $tmp[2];
-            $idComportamiento = $tmp[3];
-            $keyRadio = "r-".$id."-".$idCompetencia."-".$idComportamiento;
-            $competencias[$idCompetencia][] = $value;
-            $comportamientos[$idCompetencia]['idCompetencia'] = $idCompetencia;
-            $comportamientos[$idCompetencia]['idComportamiento'] = $idComportamiento;
-            $comportamientos[$idCompetencia]['calificacion'] = $value;
-            $comportamientos[$idCompetencia]['idcalificacion_comportamiento'] = $input[$keyRadio];
-            $comportamientos[$idCompetencia]['idresultado_candidato_ejercicio'] = null;
-            }
         }
+        foreach($input as $key => $value){
+            if( substr($key,0,2) == "s-" && $value != -1 && $value != 'Seleccione'){
+                $tmp = explode('-',$key);
+                $idCompetencia = $tmp[2];
+                $idComportamiento = $tmp[3];
+                $keyRadio = "r-".$id."-".$idCompetencia."-".$idComportamiento;
+                $temporal = explode('-',$value);
+                $competencias[$idCompetencia][] = $temporal[0];
+                $comportamientos[$idCompetencia][$idComportamiento]['idCompetencia'] = $idCompetencia;
+                $comportamientos[$idCompetencia][$idComportamiento]['idComportamiento'] = $idComportamiento;
+                $comportamientos[$idCompetencia][$idComportamiento]['calificacion'] = $temporal[0];
+                $comportamientos[$idCompetencia][$idComportamiento]['idcalificacion_comportamiento'] = $input[$keyRadio] + 0;
+            }
+        }       
         if(count($competencias) > 0){
               $this->insertaResultados($competencias ,$id, $comportamientos);
         }    
@@ -191,10 +218,12 @@ class CalificarRepository extends Repository {
     private function eliminaCalificaciones($input){
         $arrayResultados = $arrayDetalles = array();
         foreach($input as $key => $value){
-            if( substr($key,0,2) == "s-"){
-                $tmp = explode('-',$key);                
-                $arrayResultados[] = $tmp[5];
-                $arrayDetalles[]   = $tmp[6];                
+            if( substr($key,0,2) == "s-" && $value != -1 && $value != 'Seleccione'){
+                $tmp = explode('-',$value);         
+                if(isset($tmp[1]) > 0 && isset($tmp[2]) > 0){
+                    $arrayResultados[] = $tmp[1];
+                    $arrayDetalles[]   = $tmp[2];
+                }
             }
         }
         if(count($arrayDetalles) > 0){
@@ -219,18 +248,19 @@ class CalificarRepository extends Repository {
     }
     
     private function insertaResultados($competencias,$id, $comportamientos){
-        $noCalificaciones = $califCompetencia = $totalCalificacion = 0;
-        foreach($competencias as $idCompetencia => $calificaciones){
-            $noCalificaciones = $califCompetencia = $totalCalificacion = 0;
-            foreach($calificaciones as $total){
-                $califCompetencia = $califCompetencia + $total;
-                $noCalificaciones ++;
+        $temporal = $comportamientos;
+        $noCalificaciones = $califCompetencia = $totalCalificacion = 0;        
+        foreach($temporal as $idCompetencia => $datas){
+            $noCalificaciones = $califCompetencia = $totalCalificacion = 0;            
+            foreach($datas as $data){             
+                $califCompetencia = $califCompetencia + $data['calificacion'] + 0;
+                $noCalificaciones ++;                
             }
             $totalCalificacion = number_format($califCompetencia / $noCalificaciones, 1,'.',',');
-            $resultado = $this->insertaCompetencia($id,$idCompetencia,$totalCalificacion);
-            $comportamientos[$idCompetencia]['idresultado_candidato_ejercicio'] = $resultado->idresultado_candidato_ejercicio;
+            $resultado = $this->insertaCompetencia($id,$idCompetencia,$totalCalificacion);            
+            $this->guardaComportamiento($id,$comportamientos[$idCompetencia],$resultado->idresultado_candidato_ejercicio);
         }
-        $this->guardaComportamiento($id,$comportamientos);
+        
     }
     
     private function insertaCompetencia($id,$idCompetencia,$totalCalificacion){
@@ -244,19 +274,17 @@ class CalificarRepository extends Repository {
             DB::commit();
         }
         catch ( \Exception $e ) {
-            die("error:  ".$e->getMessage());
             DB::rollback ();
-            die("error:  ".$e->getMessage());
             throw new \Exception('Error al guardar Espacio: ' . $e);
         }
         return $resultado;
     }
     
-    private function insertaComportamiento($id,$comportamiento){
+    private function insertaComportamiento($id,$comportamiento,$idResultado){
         DB::beginTransaction ();
         try {
             $resultado= new DetalleResultadoCandidatoEjercicio();
-            $resultado->idresultado_candidato_ejercicio = $comportamiento['idresultado_candidato_ejercicio'];
+            $resultado->idresultado_candidato_ejercicio = $idResultado;
             $resultado->idcomportamiento = $comportamiento['idComportamiento'];
             $resultado->calificacion = $comportamiento['calificacion'];    
             $resultado->idcalificacion_comportamiento = $comportamiento['idcalificacion_comportamiento'];
@@ -265,15 +293,14 @@ class CalificarRepository extends Repository {
         }
         catch ( \Exception $e ) {
             DB::rollback ();
-            die("error:  ".$e->getMessage());
             throw new \Exception('Error al guardar Espacio: ' . $e);
         }
         
     }
     
-    private function guardaComportamiento($id,$comportamientos){
+    private function guardaComportamiento($id,$comportamientos,$idResultado){   
         foreach($comportamientos as $comportamiento){
-            $this->insertaComportamiento($id,$comportamiento);
+            $this->insertaComportamiento($id,$comportamiento,$idResultado);
         }
     }
     
@@ -311,12 +338,19 @@ class CalificarRepository extends Repository {
         $this->totalCalificaciones = count($regreso[$idComportamiento]);
         return $regreso;
     }
-    private function agrupaCalificacionBiz($array){
+    private function agrupaCalificacionBiz($array, $estatus){
         $regreso = array();
         foreach($array as $data){
+                $idCompetencia    = $data['idcompetencia'];
                 $idComportamiento = $data['idcomportamiento'];
-                $idcalificacion_escala = $data['idcalificacion_escala'];
-                $regreso[$idComportamiento][$idcalificacion_escala] = $data['calificacion'];
+                if($estatus > 0){
+                    $idcalificacion_escala = $data['calificacion'];
+                    $regreso[$idCompetencia."-".$idComportamiento][] = $data;
+                }else{
+                    $idcalificacion_escala = '';
+                    $regreso[$idComportamiento][$idcalificacion_escala] = 'Seleccione';
+                }
+                
         }
         return $regreso;
     }

@@ -148,18 +148,17 @@ class CalificarController extends Controller
         if (( int ) $id > 0) {
             try {
                 Session ()->put ( 'editar', true );
-                $calificaciones = array();
+                $calificaciones = $caliNumerica = array();
                 $candidatoProyectoEjercicio = $this->calificarRepository->obtenRegistro( $id );
                 $cliente      = $this->calificarRepository->obtenCliente($candidatoProyectoEjercicio['idcliente']);
                 $competencias = $this->calificarRepository->obtenCompetencias();
                 $registros    = $this->calificarRepository->obtenRegistros($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);
-                $calificacion = $this->calificarRepository->obtenCalificacion($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);
-                $caliNumerica = $this->calificarRepository->obtenCalificacionNumerica($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);
+                $calificacion = $this->calificarRepository->obtenCalificacion($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);                
                 $totalCalific = $this->calificarRepository->obtenTotal();
                 $registros    = $this->calificarRepository->uneArrays($registros,$calificacion,'calif');
-                $registros    = $this->calificarRepository->uneArrays($registros,$caliNumerica,'combo');
                 $idEjercicio  = $candidatoProyectoEjercicio['idcandidato_proyecto_ejercicio'];
                 if((int) $candidatoProyectoEjercicio['estatus']> 0){ // consulto datos
+                    $caliNumerica = $this->calificarRepository->obtenCalificacionNumerica($id,$candidatoProyectoEjercicio['estatus']);
                     $calificaciones = $this->calificarRepository->recuperaCalificaciones($idEjercicio);
                 }
                 return view ( "evaluacion.calificar.editCalificar", [
@@ -168,6 +167,7 @@ class CalificarController extends Controller
                     "totalCalific" => $totalCalific,
                     "competencias" => $competencias,
                     "calificacion" => $calificacion,
+                    "caliNumerica" => $caliNumerica,
                     "registros" => $registros,
                     "calificaciones" => $calificaciones,
                     "idEstatus" => $candidatoProyectoEjercicio['estatus'],
@@ -211,4 +211,21 @@ class CalificarController extends Controller
     public function destroy($id){}
     
     
+    public function buscaCalificaciones(Request $request){
+        $exito = 0;
+        $calificaciones = array();
+        try{
+            $id = $request->get('idCalComp_');
+            if((int) $id > 0){
+                $calificaciones = $this->calificarRepository->getCalificacionesNumericas($id);
+                $exito = 1;
+            }
+        }
+        catch (\Exception $e) {
+            $this->log->error($e->getMessage()."<br>".$e->getMessage());
+        }
+        finally {
+            return json_encode(array('exito' => $exito,'calificaciones' => $calificaciones, 'total' => count($calificaciones)));
+        }   
+    }
 }

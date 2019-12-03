@@ -87,29 +87,48 @@
     													    $tmpChecked = " checked ";
     													}
     													?>
-    													<input {{$read}} type="radio" {{$tmpChecked}} class="radios" name="r-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}" id="r-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}-{{$dato['idcalificacion_comportamiento']}}" value="{{$dato['idcalificacion_comportamiento']}}">
+    													<input {{$read}} type="radio" {{$tmpChecked}} class="radios selectorRadios" name="r-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}" id="r-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}-{{$dato['idcalificacion_comportamiento']}}" value="{{$dato['idcalificacion_comportamiento']}}">
     													</td>
     												@endforeach
     												<td style="width:100px;">
-    													<select {{$read}}  name="s-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}-{{$dato['idcalificacion_comportamiento']}}-{{$temIdRes}}-{{$temIdDet}}"
-    													id="s-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}-{{$dato['idcalificacion_comportamiento']}}-{{$temIdRes}}-{{$temIdDet}}" class="form-control calificar"
+    													<select {{$read}}  name="s-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}"
+    													id="s-{{$idProyectoEjercicio}}-{{$id}}-{{$data['idcomportamiento']}}" class="form-control calificar"    													
     													style="width:100px;font-size:11px;">
-    												@if($data['combo'] != null)
-    													@if( count($data['combo']) > 1)
-    													<option value="0">Seleccione</option>
+    													@if($idEstatus == 0)
+    														<option value="-1">Seleecione</option>
+    													@else
+															<?php							
+															$valorSeleccionado = -1;
+															if(count($calificaciones)> 0 && array_key_exists($idClave, $calificaciones)){
+															    $valorDefault = $calificaciones[$idClave];
+															    $valorSeleccionado = $valorDefault['calificacion'];
+															}
+															
+															if(count($caliNumerica)> 0 && array_key_exists($idClave, $caliNumerica)){															
+    															$califTemporal = $caliNumerica[$idClave];
+			     												if($califTemporal != null &&  count($califTemporal)> 0){
+				    											    if(count($califTemporal) > 1){
+															?>
+																	<option value="-1">Seleecione</option>
+															<?php      															       
+	       														    }		
+			     												    foreach($califTemporal as $califData){
+			     												        $selected = "";
+			     												        if($califData['calificacion'] == $valorSeleccionado){
+			     												            $selected = " selected ";
+			     												        }
+				    											    ?>
+																    <option {{$selected}} value="{{$califData['calificacion']}}-{{$califData['idresultado_candidato_ejercicio']}}-{{$califData['iddetalle_resultado_candidato_ejercicio']}}">{{$califData['calificacion']}}</option>
+																    <?php 
+							     								    }
+			     												}
+															}else{
+															?>
+															<option value="-1">Seleecione</option>
+															<?php 
+															}
+															?>
     													@endif
-    													@foreach($data['combo'] as $kk => $vv)
-    													<?php
-    													$tmpSelectd = "";
-    													if($vv == $temCal){
-    													    $tmpSelectd = " selected ";
-    													}
-    													?>
-    													<option {{$tmpSelectd}} value="{{$vv}}">{{$vv}}</option>
-    													@endforeach
-    												@else
-														<option value="0">Seleccione</option>
-    												@endif
     												</select></td>
     												</tr>
                                     			@endforeach
