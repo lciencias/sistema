@@ -151,12 +151,13 @@ class CalificarController extends Controller
                 $calificaciones = $caliNumerica = array();
                 $candidatoProyectoEjercicio = $this->calificarRepository->obtenRegistro( $id );
                 $cliente      = $this->calificarRepository->obtenCliente($candidatoProyectoEjercicio['idcliente']);
-                $competencias = $this->calificarRepository->obtenCompetencias();
+                $competencias = $this->calificarRepository->obtenCompetencias();                
                 $registros    = $this->calificarRepository->obtenRegistros($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);
-                $calificacion = $this->calificarRepository->obtenCalificacion($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);                
+                $calificacion = $this->calificarRepository->obtenCalificacion($candidatoProyectoEjercicio['idtipo_ejercicio_cliente']);
                 $totalCalific = $this->calificarRepository->obtenTotal();
                 $registros    = $this->calificarRepository->uneArrays($registros,$calificacion,'calif');
                 $idEjercicio  = $candidatoProyectoEjercicio['idcandidato_proyecto_ejercicio'];
+                
                 if((int) $candidatoProyectoEjercicio['estatus']> 0){ // consulto datos
                     $caliNumerica = $this->calificarRepository->obtenCalificacionNumerica($id,$candidatoProyectoEjercicio['estatus']);
                     $calificaciones = $this->calificarRepository->recuperaCalificaciones($idEjercicio);

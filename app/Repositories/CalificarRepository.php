@@ -315,32 +315,37 @@ class CalificarRepository extends Repository {
         }
         catch ( \Exception $e ) {
             DB::rollback ();
-            throw new \Exception('Error al restablecer a la espacio con id:'.$id.' -> ' . $e);
+            throw new \Exception('Error al restablecer a la espacio: -> ' . $e);
         }
     }
     
     private function agrupaCompetencia($array){
         $regreso = array();
-        foreach($array as $data){
-            $idCompetencia    = $data['idcompetencia'];
-            $idComportamiento = $data['idcomportamiento'];
-            $regreso[$idCompetencia][$idComportamiento] = $data;
+        if(count($array) > 0){
+            foreach($array as $data){
+                $idCompetencia    = $data['idcompetencia'];
+                $idComportamiento = $data['idcomportamiento'];
+                $regreso[$idCompetencia][$idComportamiento] = $data;
+            }
         }
         return $regreso;
     }
     
     private function agrupaCalificacion($array){
         $regreso = array();
-        foreach($array as $data){
-            $idComportamiento = $data['idcomportamiento'];
-            $regreso[$idComportamiento][] = $data;            
+        if(count($array) > 0){
+            foreach($array as $data){
+                $idComportamiento = $data['idcomportamiento'];
+                $regreso[$idComportamiento][] = $data;            
+            }
+            $this->totalCalificaciones = count($regreso[$idComportamiento]);
         }
-        $this->totalCalificaciones = count($regreso[$idComportamiento]);
         return $regreso;
     }
     private function agrupaCalificacionBiz($array, $estatus){
         $regreso = array();
-        foreach($array as $data){
+        if(count($array) > 0){
+            foreach($array as $data){
                 $idCompetencia    = $data['idcompetencia'];
                 $idComportamiento = $data['idcomportamiento'];
                 if($estatus > 0){
@@ -350,6 +355,7 @@ class CalificarRepository extends Repository {
                     $idcalificacion_escala = '';
                     $regreso[$idComportamiento][$idcalificacion_escala] = 'Seleccione';
                 }
+            }
                 
         }
         return $regreso;
@@ -357,8 +363,10 @@ class CalificarRepository extends Repository {
     
     private function convierteCatalogo($array){
         $regreso = array();
-        foreach($array as $obj){
-            $regreso[$obj->idcompetencia] = $obj->nombre;
+        if(count($array) > 0){
+            foreach($array as $obj){
+                $regreso[$obj->idcompetencia] = $obj->nombre;
+            }
         }
         return $regreso;
     }
