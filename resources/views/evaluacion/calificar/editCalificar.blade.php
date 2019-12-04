@@ -13,13 +13,13 @@
     		$read = " disabled ";
     	}
 	?>
-		<div class="row" style="position:fixed;margin-left:10px;margin-right: 10px;background-color:#fff;top:0px;z-index:1000000000;">			
+		<div class="row" style="position:fixed;margin-left:1px;margin-right: 10px;background-color:#e5e5e5;top:52px;z-index:1000000000;width:80%;">			
 			<div class="col-md-12" >
 				<h4>{{Lang::get('leyendas.calificar.titulo')}}</h4>
         		<div class="row">
                    	<div class="col-md-6 col-sm-6 col-xs-12">
                        	<div class="info-box">
-                           	<span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-user"></i></span>
+                           	<span class="info-box-icon bg-aqua" ><i style="height: 45px;width:45px;" class="glyphicon glyphicon-user"></i></span>
                            	<div class="info-box-content">
 		           				<span class="info-box-text">{{$candidatoProyectoEjercicio['nombre']}} {{$candidatoProyectoEjercicio['paterno']}} {{$candidatoProyectoEjercicio['materno']}}</span><br>
         		                   <span class="info-box-text">{{Lang::get('leyendas.calificar.gerente')}}</span>
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" >
+		<div class="row" style="overflow-y: auto;overflow-x: hidden;max-height: 450px;margin-top:60px;">
 			<div class="col-md-12">        		
         		<div class="content">
             		<div class="observaciones">
