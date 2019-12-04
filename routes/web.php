@@ -166,4 +166,5 @@ Route::get('fileUpload', function () {return view('fileUpload');});
 Route::post('fileUpload', ['as'=>'fileUpload','uses'=>'ArchivoController@CargaArchivo']);
 Route::resource('catalogos/archivos','ArchivoController');
 
+Route::post('evaluacion/calificar/regresaCalificacion','CalificarController@buscaCalificaciones');
 
