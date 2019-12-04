@@ -13,7 +13,7 @@
     		$read = " disabled ";
     	}
 	?>
-		<div class="row" style="position:fixed;margin-left:1px;margin-right: 10px;background-color:#e5e5e5;top:52px;z-index:1000000000;width:80%;">			
+		<div class="row" style="position:fixed;margin-left:1px;margin-right: 10px;background-color:#e5e5e5;top:52px;width:80%;">			
 			<div class="col-md-12" >
 				<h4>{{Lang::get('leyendas.calificar.titulo')}}</h4>
         		<div class="row">
