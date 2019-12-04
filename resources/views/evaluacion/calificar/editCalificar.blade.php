@@ -37,7 +37,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" style="overflow-y: auto;overflow-x: hidden;max-height: 650px;margin-top:10px;">
+		<div class="row" >
 			<div class="col-md-12">        		
         		<div class="content">
             		<div class="observaciones">
