@@ -1,7 +1,7 @@
 $(document).ready(function() {	
 	$(".calificar").change(function(){
     	var id = $(this).val();
-    	if(parseInt(id) <= 0){
+    	if(parseInt(id) < 0){
     		error("Por favor seleccione una calificación");
     	}
     	return false;
@@ -24,7 +24,16 @@ $(document).ready(function() {
 				contadorSelect++;				
 			}
 		});
-		if( parseInt(noComportamientos) === parseInt(contadorRadios) && parseInt(noComportamientos) === parseInt(contadorSelect)  && parseInt(observaciones.length) >0 ){
+		if(parseInt(contadorRadios) !== parseInt(contadorSelect)){
+			error("Por favor revise sus respuestas, tiene que calificar cada comportamiento");
+			return false;
+		}
+		
+		if( parseInt(noComportamientos) === parseInt(contadorRadios) && parseInt(noComportamientos) === parseInt(contadorSelect) ){
+			if( parseInt(observaciones.length) === 0){
+				error("Favor de registrar las observaciones");
+				return false;
+			}
 			$("#estatus").val(2);
 		}else{
 			$("#estatus").val(1);
