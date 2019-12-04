@@ -13,31 +13,33 @@
     		$read = " disabled ";
     	}
 	?>
-		<div class="row" style="margin-left:10px;margin-right: 10px;">			
+		<div class="row" style="position:fixed;margin-left:10px;margin-right: 10px;background-color:#fff;top:0px;z-index:1000000000;">			
 			<div class="col-md-12" >
-				<div style="position: fixed;">
-        			<h4>{{Lang::get('leyendas.calificar.titulo')}}</h4>
-        			<div class="row">
-                    	<div class="col-md-6 col-sm-6 col-xs-12">
-                        	<div class="info-box">
-                            	<span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-user"></i></span>
-                            	<div class="info-box-content">
-		            				<span class="info-box-text">{{$candidatoProyectoEjercicio['nombre']}} {{$candidatoProyectoEjercicio['paterno']}} {{$candidatoProyectoEjercicio['materno']}}</span><br>
-        		                    <span class="info-box-text">{{Lang::get('leyendas.calificar.gerente')}}</span>
-                	            </div>
-							</div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        	<div class="info-box">
-                            	<div class="info-box-content">
-                              		<span class="info-box-text">{{Lang::get('leyendas.calificar.ejercicio')}} {{$candidatoProyectoEjercicio['ejercicio']}}</span><br>
-                              		<span class="info-box-text">{{$cliente['nombre_comercial']}}</span>
-                            	</div>
-                          	</div>
-                        </div>
+				<h4>{{Lang::get('leyendas.calificar.titulo')}}</h4>
+        		<div class="row">
+                   	<div class="col-md-6 col-sm-6 col-xs-12">
+                       	<div class="info-box">
+                           	<span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-user"></i></span>
+                           	<div class="info-box-content">
+		           				<span class="info-box-text">{{$candidatoProyectoEjercicio['nombre']}} {{$candidatoProyectoEjercicio['paterno']}} {{$candidatoProyectoEjercicio['materno']}}</span><br>
+        		                   <span class="info-box-text">{{Lang::get('leyendas.calificar.gerente')}}</span>
+                            </div>
+						</div>
+                	</div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    	<div class="info-box">
+                        	<div class="info-box-content">
+                            	<span class="info-box-text">{{Lang::get('leyendas.calificar.ejercicio')}} {{$candidatoProyectoEjercicio['ejercicio']}}</span><br>
+                              	<span class="info-box-text">{{$cliente['nombre_comercial']}}</span>
+                            </div>
+                    	</div>
 					</div>
-        		</div>
-        		<div class="content" style="margin-top:130px;">
+				</div>
+			</div>
+		</div>
+		<div class="row" style="overflow-y: auto;overflow-x: hidden;max-height: 650px;margin-top:10px;">
+			<div class="col-md-12">        		
+        		<div class="content">
             		<div class="observaciones">
             			<h4>{{Lang::get('leyendas.calificar.observaciones')}}</h4>
             			<textarea {{$read}} class="form-control" rows="3" style="width:100%;" name="observaciones" id="observaciones">{{$candidatoProyectoEjercicio['observaciones']}}</textarea>
