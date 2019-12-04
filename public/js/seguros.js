@@ -247,7 +247,7 @@ function exito(msg){
 	$('#procesando').fadeIn(1000).html("");
 	$("#errorJs").addClass("alert alert-success alert-dismissible" );
 	//$("#errorJs").css({"position": "absolute", "top": "0px", "right": "0px", "index-z":"9999999999999"});
-	$("#errorJs").css({"position": "absolute", "top": "50%", "left": "50%", "width":"200px", "margin-left":"-100px" , "height":"60px" , "margin-top":"30px", "opacity":"0.9"});
+	$("#errorJs").css({"position": "absolute", "top": "50%", "left": "50%", "width":"300px", "margin-left":"-100px" , "height":"80px" , "margin-top":"25px", "opacity":"0.9"});
 	$("#errorJs").html(msg);
     setTimeout(function(){
     	$("#errorJs").removeClass("alert-success alert-dismissible" );
@@ -261,7 +261,7 @@ function error(msg){
 	$('#procesando').fadeIn(1000).html("");
 	$("#errorJs").addClass("alert alert-danger alert-dismissible" );
 	//$("#errorJs").css({"position": "absolute", "top": "0px", "right": "200px", "index-z":"9999999999999"});
-	$("#errorJs").css({"position": "absolute", "top": "50%", "left": "50%", "width":"200px", "margin-left":"-100px" , "height":"60px" , "margin-top":"30px", "opacity":"0.9"});
+	$("#errorJs").css({"position": "absolute", "top": "50%", "left": "50%", "width":"300px", "margin-left":"-100px" , "height":"80px" , "margin-top":"25px", "opacity":"0.9"});
 	if(String(msg) === '')
 		$("#errorJs").html("Error inesperado favor de notificar al administrador.");
 	else
@@ -281,7 +281,7 @@ function warning(msg){
 	$('#procesando').fadeIn(1000).html("");
 	$("#errorJs").addClass("alert alert-warning alert-dismissible" );
 	//$("#errorJs").css({"position": "absolute", "top": "0px", "right": "0px", "index-z":"9999999999999"});
-	$("#errorJs").css({"position": "absolute", "top": "10%", "left": "50%", "width":"200px", "margin-left":"-100px" , "height":"60px" , "margin-top":"30px", "opacity":"0.9"});
+	$("#errorJs").css({"position": "absolute", "top": "10%", "left": "50%", "width":"300px", "margin-left":"-100px" , "height":"80px" , "margin-top":"25px", "opacity":"0.9"});
 	if(String(msg) === '')
 		$("#errorJs").html("Error inesperado favor de notificar al administrador.");
 	else

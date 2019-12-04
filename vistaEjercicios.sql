@@ -6,7 +6,7 @@ proyecto.idproyecto as idproyecto, proyecto.nombre as proyecto,  DATE_FORMAT(pro
 DATEDIFF("2019-11-23 23:15:10",proyecto.fecha_fin) as dias,
 tipo_ejercicio.idtipo_ejercicio, tipo_ejercicio.nombre as tipoejercicio,
 CASE
-    WHEN DATEDIFF("2019-11-23 23:15:10",proyecto.fecha_fin) > 10 THEN "#dff0d8"
+    WHEN DATEDIFF("2019-11-23 23:15:10",proyecto.fecha_fin) > 10 THEN "#449d44"
     WHEN DATEDIFF("2019-11-23 23:15:10",proyecto.fecha_fin) > 5 AND DATEDIFF("2019-11-23 23:15:10",proyecto.fecha_fin) <=10 THEN "#fcf8e3"
     ELSE "#f2dede"
 END as clase,candidato_proyecto_ejercicio.observaciones
